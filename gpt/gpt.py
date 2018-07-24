@@ -23,7 +23,7 @@ def parsing(gpt):
         if guid_sum == 0:
             exit(0)
         else:
-            print "Real Offset","[",idx,"]:", struct.unpack_from("<I", partition_info[part_idx+START_LBA_OFFSET:part_idx+START_LBA_OFFSET+8])[0]*512
+            print "Real Offset","[",idx,"]:", struct.unpack_from("<q", partition_info[part_idx+START_LBA_OFFSET:part_idx+START_LBA_OFFSET+8])[0]*512
         part_idx+=128
         idx += 1
 
@@ -32,10 +32,7 @@ def load(image):
     data = f.read()
     gpt = data[MBR_HDR_SIZE:]
     parsing(gpt)
-    f.close
-
-def init():
-    print "GPT Parser"
+    f.close()
 
 def main(image):
     init()
